@@ -5,8 +5,8 @@ const tmi = require('tmi.js');
 // Define configuration options
 const opts = {
   identity: {
-    username: "Maskedflame073",
-    password: "d8ea0nppsx3elo2kpx5nurd1wzjash"
+    username: "Makedbot073",
+    password: "Hold" // In folder, replace when running
   },
   channels: [
     "c0w0kie"
@@ -26,32 +26,53 @@ var wins = 0;
 var losses = 0;
 
 // Called every time a message comes in
-function onMessageHandler (target, context, msg, self) {
-  console.log(context.toString());
+function onMessageHandler (target, context, msg, self) { // Context is an object containing the data on the user who sent the message
   if (self) { return; } // Ignore messages from the bot
 
   // Remove whitespace from chat message
-  console.log(msg);
   const commandName = msg.trim();
 
   // If the command is known, execute it and log it to the console
   if (commandName === '!w'){
-    wins += 1;
-    client.say(target, `W: ${wins} L: ${losses}`);
-    console.log(`* Executed ${commandName} command`);
+    if(context['display-name'] == target){
+      wins += 1;
+      client.say(target, `W: ${wins} L: ${losses}`);
+      console.log(`* Executed ${commandName} command`);
+    }
+    
+    else{
+        client.say(target, `You don't have permission to use this commmand.`);
+        console.log(`* User ${context['display-name']} does not have permission to use the ${commandName} command`);
+    }
   }
   
   else if (commandName === '!l'){
-    losses += 1;
-    client.say(target, `W: ${wins} L: ${losses}`);
-    console.log(`* Executed ${commandName} command`);
+    if(context['display-name'] == target){
+      losses += 1;
+      client.say(target, `W: ${wins} L: ${losses}`);
+      console.log(`* Executed ${commandName} command`);
+    }
+
+    else{
+      client.say(target, `You don't have permission to use this command.`);
+      console.log(`* User ${context['display-name']} does not have permission to use the ${commandName} command`);
+    }
   }
 
   else if (commandName === '!wlclear'){
-    wins = 0;
-    losses = 0;
-    client.say(target, `Win/Loss record cleared`);
-    console.log(`* Executed ${commandName} command`);
+  
+    if(context['display-name'] == target){
+      wins = 0;
+      losses = 0;
+      client.say(target, `Win/Loss record cleared`);
+      console.log(`* Executed ${commandName} command`);
+    }
+    
+    else{
+      client.say(target, `You don't have permission to use this command.`);
+      console.log(`* User ${context['display-name']} does not have permission to use the ${commandName} command`);
+    }
+
   }
 
   else if (commandName === '!dice') {
@@ -74,4 +95,5 @@ function rollDice () {
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
   console.log(`* Connected to ${addr}:${port}`);
+  client.say(target, `Hello! I am MaskedBot!`);
 }
