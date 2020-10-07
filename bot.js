@@ -6,7 +6,7 @@ const tmi = require('tmi.js');
 const opts = {
   identity: {
     username: "Makedbot073",
-    password: "Hold" // In folder, replace when running
+    password: "md1lwkafiujihe6arr3yv0g5vfrdee" // In folder, replace when running
   },
   // "astrophysiciann"
   channels: [
@@ -35,12 +35,11 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
 
   // If the command is known, execute it and log it to the console
   if (commandName === '!w'){
-    if(context['display-name'] == target){
+    if('#' + context['display-name'] == target){
       wins += 1;
       client.say(target, `W: ${wins} L: ${losses}`);
       console.log(`* Executed ${commandName} command`);
     }
-    
     else{
         client.say(target, `You don't have permission to use this commmand.`);
         console.log(`* User ${context['display-name']} does not have permission to use the ${commandName} command`);
@@ -48,7 +47,7 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
   }
   
   else if (commandName === '!l'){
-    if(context['display-name'] == target){
+    if('#' + context['display-name'] == target){
       losses += 1;
       client.say(target, `W: ${wins} L: ${losses}`);
       console.log(`* Executed ${commandName} command`);
@@ -62,7 +61,7 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
 
   else if (commandName === '!wlclear'){
   
-    if(context['display-name'] == target){
+    if('#' + context['display-name'] == target){
       wins = 0;
       losses = 0;
       client.say(target, `Win/Loss record cleared`);
