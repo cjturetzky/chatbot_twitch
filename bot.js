@@ -8,6 +8,7 @@ const opts = {
     username: "Makedbot073",
     password: "Hold" // In folder, replace when running
   },
+  // "astrophysiciann"
   channels: [
     "c0w0kie"
   ]
@@ -95,5 +96,4 @@ function rollDice () {
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
   console.log(`* Connected to ${addr}:${port}`);
-  client.say(target, `Hello! I am MaskedBot!`);
 }
