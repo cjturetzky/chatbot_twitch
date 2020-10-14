@@ -25,6 +25,7 @@ client.connect();
 
 var wins = 0;
 var losses = 0;
+var known = true;
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) { // Context is an object containing the data on the user who sent the message
@@ -38,7 +39,6 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
     if('#' + context['display-name'] == target){
       wins += 1;
       client.say(target, `W: ${wins} L: ${losses}`);
-      console.log(`* Executed ${commandName} command`);
     }
     else{
         client.say(target, `You don't have permission to use this commmand.`);
@@ -50,7 +50,6 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
     if('#' + context['display-name'] == target){
       losses += 1;
       client.say(target, `W: ${wins} L: ${losses}`);
-      console.log(`* Executed ${commandName} command`);
     }
 
     else{
@@ -65,7 +64,6 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
       wins = 0;
       losses = 0;
       client.say(target, `Win/Loss record cleared`);
-      console.log(`* Executed ${commandName} command`);
     }
     
     else{
@@ -75,14 +73,23 @@ function onMessageHandler (target, context, msg, self) { // Context is an object
 
   }
 
+  else if (commandName === '!wlrecord') {
+    if(wins == 0 & losses == 0){
+        client.say(target, `W: ${wins} L: ${losses}`);
+    }
+  }
   else if (commandName === '!dice') {
     const num = rollDice();
     client.say(target, `You rolled a ${num}`);
-    console.log(`* Executed ${commandName} command`);
   } 
 
   else {
     console.log(`* Unknown command ${commandName}`);
+    known = false;
+  }
+
+  if(known){
+    console.log(`* Executed ${commandName} command`);
   }
 }
 
