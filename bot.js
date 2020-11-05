@@ -6,11 +6,11 @@ const tmi = require('tmi.js');
 const opts = {
   identity: {
     username: "Makedbot073",
-    password: "Hold" // In folder, replace when running
+    password: "Placeholder" // In folder, replace when running
   },
-  // "astrophysiciann"
+  // "astrophysiciann" "c0w0kie"
   channels: [
-    "c0w0kie"
+   "c0w0kie"
   ]
 };
 // Create a client with our options
